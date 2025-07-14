@@ -12,5 +12,9 @@ class Service extends Model
     use SoftDeletes;
     protected $table = 'services';
 
-    protected $fillable = ['title', 'image','description'];
+    protected $fillable = ['title', 'image', 'description'];
+    protected $casts = [
+        'title' => 'array',
+        'description' => 'array',
+    ];
 }

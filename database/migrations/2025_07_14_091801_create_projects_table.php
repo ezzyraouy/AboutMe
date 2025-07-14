@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('title')->nullable();
             $table->json('description')->nullable();
+            $table->string('slug');
             $table->string('image')->nullable();
             $table->string('link')->nullable();
             $table->string('github_link')->nullable();

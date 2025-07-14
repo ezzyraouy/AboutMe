@@ -1,10 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ResourceController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +24,17 @@ Route::middleware(['auth','is_admin'])->group(callback: function () {
     Route::delete('/blogs/{blog}/remove-image', [BlogController::class, 'removeImage'])->name('blogs.removeImage');
     //projects
     Route::resource('projects', ProjectController::class);
-    Route::delete('/projects/{project}/remove-image', [ProjectController::class, 'removeImage'])->name('blogs.removeImage');
+    Route::delete('/projects/{project}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.removeImage');
+    //educations
+    Route::resource('educations', EducationController::class);
+    //experiences
+    Route::resource('experiences', ExperienceController::class);
+    //skills
+    Route::resource('skills', SkillController::class);
+    //services
+    Route::resource('services', ServiceController::class);
+    //certificates
+    Route::resource('certificates', CertificateController::class);
 
     Route::resource('users', UserController::class);
     Route::resource('contacts', ContactController::class);

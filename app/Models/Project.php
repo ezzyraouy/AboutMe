@@ -12,18 +12,29 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title','description','image','video','link','github_link'
+        'title',
+        'description',
+        'slug',
+        'image',
+        'video',
+        'link',
+        'github_link'
+    ];
+
+    protected $casts = [
+        'title' => 'array',
+        'description' => 'array',
     ];
 
     public function resources()
     {
         return $this->morphMany(Resource::class, 'resourceable');
     }
-    
+
     public function categories()
     {
         return $this->belongsToMany(Category::class)
-                    ->using(CategoryProject::class)
-                    ->withTimestamps();
+            ->using(CategoryProject::class)
+            ->withTimestamps();
     }
 }

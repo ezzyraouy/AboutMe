@@ -12,8 +12,7 @@
                     name="title[{{ $lang }}]"
                     label="Titre ({{ strtoupper($lang) }})" 
                     placeholder="Saisir le titre en {{ strtoupper($lang) }}"
-                    :value="$project->title[$lang] ?? ''" 
-                    :required="$lang === 'fr'" />
+                    :value="$project->title[$lang] ?? ''" />
             </div>
 
             <div class="col-md-12">
@@ -22,8 +21,7 @@
                     name="description[{{ $lang }}]"
                     label="Description ({{ strtoupper($lang) }})" 
                     placeholder="Saisir la description en {{ strtoupper($lang) }}"
-                    :value="$project->description[$lang] ?? ''" 
-                    :required="$lang === 'fr'" />
+                    :value="$project->description[$lang] ?? ''" />
             </div>
         @endforeach
     </div>

@@ -12,4 +12,9 @@ class Education extends Model
     use SoftDeletes;
     protected $table = 'educations';
     protected $fillable = ['title', 'lieu', 'datedebut', 'datefin'];
+    
+    protected $casts = [
+        'title' => 'array',
+        'lieu' => 'array',
+    ];
 }
