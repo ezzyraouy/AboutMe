@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CategoryProject extends Model
+class CategoryProject extends Pivot
 {
     protected $table = 'category_project';
 

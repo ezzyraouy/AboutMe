@@ -2,13 +2,14 @@
     :show-reset="!isset($blog)" submit-label="{{ isset($blog) ? 'Mettre à jour' : 'Créer' }}">
     <div class="row">
         @foreach (['fr', 'en', 'ar'] as $lang)
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <x-admin.ui.inputs.text id="title_{{ $lang }}" name="title[{{ $lang }}]"
                     label="Titre ({{ strtoupper($lang) }})" placeholder="Saisir le titre en {{ strtoupper($lang) }}"
                     :value="$blog->title[$lang] ?? ''" :required="$lang === 'fr'" />
             </div>
-
-            <div class="col-md-12">
+        @endforeach
+        @foreach (['fr', 'en', 'ar'] as $lang)
+            <div class="col-md-4">
                 <x-admin.ui.inputs.tinymce id="content_{{ $lang }}" name="content[{{ $lang }}]"
                     label="Contenu ({{ strtoupper($lang) }})" placeholder="Saisir le contenu en {{ strtoupper($lang) }}"
                     :value="$blog->content[$lang] ?? ''" :required="$lang === 'fr'" />

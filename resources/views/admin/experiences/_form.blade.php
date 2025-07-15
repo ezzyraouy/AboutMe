@@ -8,7 +8,7 @@
 
     <div class="row">
         @foreach (['fr', 'en', 'ar'] as $lang)
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <x-admin.ui.inputs.text 
                     id="title_{{ $lang }}" 
                     name="title[{{ $lang }}]"
@@ -17,8 +17,9 @@
                     :value="$experience->title[$lang] ?? ''" 
                     :required="$lang === 'fr'" />
             </div>
-
-            <div class="col-md-12">
+         @endforeach
+         @foreach (['fr', 'en', 'ar'] as $lang)
+            <div class="col-md-4">
                 <x-admin.ui.inputs.tinymce 
                     id="description_{{ $lang }}" 
                     name="description[{{ $lang }}]"
@@ -26,8 +27,9 @@
                     placeholder="Saisir la description en {{ strtoupper($lang) }}"
                     :value="$experience->description[$lang] ?? ''" />
             </div>
-
-            <div class="col-md-12">
+         @endforeach
+         @foreach (['fr', 'en', 'ar'] as $lang)
+            <div class="col-md-4">
                 <x-admin.ui.inputs.text 
                     id="lieu_{{ $lang }}" 
                     name="lieu[{{ $lang }}]"

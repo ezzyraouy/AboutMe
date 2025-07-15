@@ -48,21 +48,29 @@
 
         {{-- Projects --}}
         <li class="nav-item">
-            <a class="nav-link {{ Str::startsWith(request()->url(), route('admin.projects.index')) ? '' : 'collapsed' }}"
+            <a class="nav-link {{ Str::startsWith(request()->url(), route('admin.projects.index')) || Str::startsWith(request()->url(), route('admin.categories.index')) ? '' : 'collapsed' }}"
                 data-bs-target="#projects-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-kanban-fill"></i><span>Projects</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
+
             <ul id="projects-nav"
                 class="nav-content collapse {{ Str::startsWith(request()->url(), route('admin.projects.index')) ? 'show' : '' }}"
-                data-bs-parent="#projects-nav">
+                data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('admin.projects.index') }}"
                         class="{{ Str::startsWith(request()->url(), route('admin.projects.index')) ? 'active' : '' }}">
                         <i class="bi bi-folder-fill"></i><span>Liste Projects</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.categories.index') }}"
+                        class="{{ Str::startsWith(request()->url(), route('admin.categories.index')) ? 'active' : '' }}">
+                        <i class="bi bi-tags-fill"></i><span>Categories</span>
+                    </a>
+                </li>
             </ul>
         </li>
+
 
         {{-- Education --}}
         <li class="nav-item">

@@ -1,13 +1,41 @@
-@props(['id', 'name', 'label' => null, 'options' => [], 'value' => '', 'required' => false])
+@props([
+    'id',
+    'name',
+    'label' => null,
+    'options' => [],
+    'selected' => '',
+    'required' => false,
+    'placeholder' => '',
+    'class' => '',
+    'multiple' => false,
+])
 
-<div class="mb-4 col-md-6">
+<div class="mb-4 col-md-12">
     @if ($label)
         <label for="{{ $id }}" class="form-label">{{ $label }}</label>
     @endif
 
-    <select id="{{ $id }}" name="{{ $name }}" class="form-select @error($name) is-invalid @enderror" {{ $required ? 'required' : '' }}>
+    <select
+        id="{{ $id }}"
+        name="{{ $name }}"
+        class="form-select {{ $class }} @error($name) is-invalid @enderror"
+        {{ $required ? 'required' : '' }}
+        @if($multiple) multiple @endif
+    >
+        @if ($placeholder && !$multiple)
+            <option value="">{{ $placeholder }}</option>
+        @endif
+
         @foreach ($options as $optionValue => $optionLabel)
-            <option value="{{ $optionValue }}" {{ old($name, $value) == $optionValue ? 'selected' : '' }}>{{ $optionLabel }}</option>
+            @if ($multiple)
+                <option value="{{ $optionValue }}" {{ collect(old($name, $selected))->contains($optionValue) ? 'selected' : '' }}>
+                    {{ $optionLabel }}
+                </option>
+            @else
+                <option value="{{ $optionValue }}" {{ old($name, $selected) == $optionValue ? 'selected' : '' }}>
+                    {{ $optionLabel }}
+                </option>
+            @endif
         @endforeach
     </select>
 

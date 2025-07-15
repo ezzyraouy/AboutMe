@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\Category;
 
 class ProjectController extends Controller
 {
@@ -36,10 +37,15 @@ class ProjectController extends Controller
         return view('admin.projects.index');
     }
 
+
     public function create()
     {
-        return view('admin.projects.create');
+        $categories = Category::all();
+        return view('admin.projects.create', compact('categories'));
     }
+
+
+
 
     public function store(Request $request)
     {
@@ -79,7 +85,7 @@ class ProjectController extends Controller
 
         // Create Project
         $project = Project::create($data);
-
+        $project->categories()->sync($request->input('categories', []));
         // Handle file uploads
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $index => $file) {
@@ -99,7 +105,8 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $categories = Category::all();
+        return view('admin.projects.edit', compact('project', 'categories'));
     }
 
     public function update(Request $request, Project $project)
@@ -144,6 +151,7 @@ class ProjectController extends Controller
 
         // Update Project
         $project->update($data);
+        $project->categories()->sync($request->input('categories', []));
 
         // Handle new file uploads
         if ($request->hasFile('files')) {

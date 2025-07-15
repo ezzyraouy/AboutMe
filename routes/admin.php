@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -35,6 +36,8 @@ Route::middleware(['auth','is_admin'])->group(callback: function () {
     Route::resource('services', ServiceController::class);
     //certificates
     Route::resource('certificates', CertificateController::class);
+    //categories
+    Route::resource('categories', CategoryController::class);
 
     Route::resource('users', UserController::class);
     Route::resource('contacts', ContactController::class);

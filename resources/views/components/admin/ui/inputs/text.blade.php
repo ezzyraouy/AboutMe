@@ -4,7 +4,7 @@
     $errorKey = str_replace(['[', ']'], ['.', ''], $name);
 @endphp
 
-<div class="mb-4 col-md-6">
+<div class="mb-4 col-md-12">
     @if ($label)
         <label for="{{ $id }}" class="form-label">{{ $label }}</label>
     @endif

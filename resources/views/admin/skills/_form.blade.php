@@ -8,7 +8,7 @@
 
     <div class="row">
         @foreach (['fr', 'en', 'ar'] as $lang)
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <x-admin.ui.inputs.text 
                     id="title_{{ $lang }}" 
                     name="title[{{ $lang }}]"
@@ -17,8 +17,9 @@
                     :value="$skill->title[$lang] ?? ''" 
                     :required="$lang === 'fr'" />
             </div>
-
-            <div class="col-md-6">
+        @endforeach
+        @foreach (['fr', 'en', 'ar'] as $lang)
+            <div class="col-md-4">
                 <x-admin.ui.inputs.text 
                     id="percent_{{ $lang }}" 
                     name="percent[{{ $lang }}]"
