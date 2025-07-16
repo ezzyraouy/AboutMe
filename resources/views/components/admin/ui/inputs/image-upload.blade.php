@@ -18,7 +18,7 @@
     @if ($value)
         <div class="mt-2 position-relative d-inline-block">
             <img src="{{ asset('storage/' . $value) }}" alt="Image principale"
-                style="max-height: 200px; border-radius: .25rem;">
+                style="max-height: 200px; border-radius: .25rem;width: 100%;">
             <div class="position-absolute top-0 end-0 p-2 bg-white rounded-bottom-start" style="opacity: 0.9;">
                 <button type="button" onclick="deleteMainImage({{ $blogId }}, this)"
                     class="btn btn-sm btn-link text-danger p-0 m-0" title="Supprimer l'image principale">

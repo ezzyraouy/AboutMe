@@ -27,6 +27,23 @@
                 </li>
             </ul>
         </li>
+        {{-- Slides --}}
+        <li class="nav-item">
+            <a class="nav-link {{ Str::startsWith(request()->url(), route('admin.slides.index')) ? '' : 'collapsed' }}"
+                data-bs-target="#slides-nav" data-bs-toggle="collapse" href="#">
+                <i class="ri-slideshow-fill"></i><span>Slides</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="slides-nav"
+                class="nav-content collapse {{ Str::startsWith(request()->url(), route('admin.slides.index')) ? 'show' : '' }}"
+                data-bs-parent="#slides-nav">
+                <li>
+                    <a href="{{ route('admin.slides.index') }}"
+                        class="{{ Str::startsWith(request()->url(), route('admin.slides.index')) ? 'active' : '' }}">
+                        <i class="bi-list-ul"></i><span>Liste Slides</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         {{-- Blog --}}
         <li class="nav-item">

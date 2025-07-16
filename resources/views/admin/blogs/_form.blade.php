@@ -1,14 +1,14 @@
 <x-admin.ui.form-card :title="isset($blog) ? 'Modifier un blog' : 'Ajouter un blog'" :action="isset($blog) ? route('admin.blogs.update', $blog) : route('admin.blogs.store')" :method="isset($blog) ? 'PUT' : 'POST'" enctype="multipart/form-data"
     :show-reset="!isset($blog)" submit-label="{{ isset($blog) ? 'Mettre à jour' : 'Créer' }}">
     <div class="row">
-        @foreach (['fr', 'en', 'ar'] as $lang)
+        @foreach (config('languages.available') as $lang)
             <div class="col-md-4">
                 <x-admin.ui.inputs.text id="title_{{ $lang }}" name="title[{{ $lang }}]"
                     label="Titre ({{ strtoupper($lang) }})" placeholder="Saisir le titre en {{ strtoupper($lang) }}"
                     :value="$blog->title[$lang] ?? ''" :required="$lang === 'fr'" />
             </div>
         @endforeach
-        @foreach (['fr', 'en', 'ar'] as $lang)
+        @foreach (config('languages.available') as $lang)
             <div class="col-md-4">
                 <x-admin.ui.inputs.tinymce id="content_{{ $lang }}" name="content[{{ $lang }}]"
                     label="Contenu ({{ strtoupper($lang) }})" placeholder="Saisir le contenu en {{ strtoupper($lang) }}"

@@ -5,7 +5,7 @@
     submit-label="{{ isset($category) ? 'Mettre à jour' : 'Créer' }}">
 
     <div class="row">
-        @foreach (['fr', 'en', 'ar'] as $lang)
+        @foreach (config('languages.available') as $lang)
             <div class="col-md-4">
                 <x-admin.ui.inputs.text 
                     id="title_{{ $lang }}" 
@@ -15,7 +15,7 @@
                     :value="$category->title[$lang] ?? ''" />
             </div>
         @endforeach
-        @foreach (['fr', 'en', 'ar'] as $lang)
+        @foreach (config('languages.available') as $lang)
             <div class="col-md-4">
                 <x-admin.ui.inputs.text 
                     id="description_{{ $lang }}" 

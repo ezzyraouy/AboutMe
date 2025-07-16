@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //     return 'Admin Dashboard Works!';
 // })->name('dashboard');
 
-Route::middleware(['auth','is_admin'])->group(callback: function () {
+Route::middleware(['auth', 'is_admin'])->group(callback: function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('blogs', BlogController::class);
@@ -38,10 +39,11 @@ Route::middleware(['auth','is_admin'])->group(callback: function () {
     Route::resource('certificates', CertificateController::class);
     //categories
     Route::resource('categories', CategoryController::class);
+    //slides
+    Route::resource('slides', SlideController::class);
+    Route::post('/slides/delete-file', [SlideController::class, 'deleteFile'])->name('slides.deletefile');
 
     Route::resource('users', UserController::class);
     Route::resource('contacts', ContactController::class);
     Route::resource('resources', ResourceController::class);
-
 });
-
