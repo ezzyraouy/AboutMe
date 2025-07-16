@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\UserController;
@@ -42,7 +43,9 @@ Route::middleware(['auth', 'is_admin'])->group(callback: function () {
     //slides
     Route::resource('slides', SlideController::class);
     Route::post('/slides/delete-file', [SlideController::class, 'deleteFile'])->name('slides.deletefile');
-
+    //settings
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
     Route::resource('users', UserController::class);
     Route::resource('contacts', ContactController::class);
     Route::resource('resources', ResourceController::class);

@@ -9,7 +9,13 @@
                 <span>Home</span>
             </a>
         </li>
-
+        {{-- Settings --}}
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.settings.index') ? '' : 'collapsed' }}"
+                href="{{ route('admin.settings.index') }}">
+                <i class="bi bi-gear-fill"></i><span>Settings</span>
+            </a>
+        </li>
         {{-- Users --}}
         <li class="nav-item">
             <a class="nav-link {{ Str::startsWith(request()->url(), route('admin.users.index')) ? '' : 'collapsed' }}"
