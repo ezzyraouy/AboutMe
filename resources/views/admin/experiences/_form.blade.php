@@ -18,6 +18,17 @@
                     :required="$lang === 'fr'" />
             </div>
          @endforeach
+        @foreach (config('languages.available') as $lang)
+            <div class="col-md-4">
+                <x-admin.ui.inputs.text 
+                    id="position_{{ $lang }}" 
+                    name="position[{{ $lang }}]"
+                    label="Poste ({{ strtoupper($lang) }})" 
+                    placeholder="Saisir le poste en {{ strtoupper($lang) }}"
+                    :value="$experience->position[$lang] ?? ''" 
+                    :required="$lang === 'fr'" />
+            </div>
+         @endforeach
          @foreach (config('languages.available') as $lang)
             <div class="col-md-4">
                 <x-admin.ui.inputs.tinymce 
@@ -45,10 +56,10 @@
         {{-- Date début --}}
         <div class="col-md-6">
             <x-admin.ui.inputs.text 
-                id="datedebut" 
-                name="datedebut"
+                id="start_date" 
+                name="start_date"
                 label="Date de début" 
-                :value="$experience->datedebut ?? ''" 
+                :value="$experience->start_date ?? ''" 
                 type="date"
                 required />
         </div>
@@ -56,10 +67,10 @@
         {{-- Date fin --}}
         <div class="col-md-6">
             <x-admin.ui.inputs.text 
-                id="datefin" 
-                name="datefin"
+                id="end_date" 
+                name="end_date"
                 label="Date de fin" 
-                :value="$experience->datefin ?? ''"
+                :value="$experience->end_date ?? ''"
                 type="date" />
         </div>
     </div>

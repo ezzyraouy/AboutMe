@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -81,7 +82,29 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+        }
         $category->delete();
         return redirect()->route('admin.categories.index')->with('error', 'Category supprimée avec succès.');
+    }
+
+    public function removeImage(Category $category)
+    {
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+            $category->image = null;
+            $category->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
     }
 }

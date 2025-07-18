@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\Storage;
 class SkillController extends Controller
 {
     public function index(Request $request)
@@ -80,7 +80,29 @@ class SkillController extends Controller
 
     public function destroy(Skill $skill)
     {
+        if ($skill->image) {
+            Storage::disk('public')->delete($skill->image);
+        }
         $skill->delete();
-        return redirect()->route('admin.skills.index')->with('error', 'Compétence supprimée avec succès.');
+        return redirect()->route('admin.projects.index')->with('error', 'Project supprimé avec succès.');
+    }
+
+    public function removeImage(Skill $skill)
+    {
+        if ($skill->image) {
+            Storage::disk('public')->delete($skill->image);
+            $skill->image = null;
+            $skill->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
     }
 }

@@ -157,6 +157,9 @@ class BlogController extends Controller
 
     public function destroy(Blog $blog)
     {
+        if ($blog->image) {
+            Storage::disk('public')->delete($blog->image);
+        }
         $blog->delete();
         return redirect()->route('admin.blogs.index')->with('error', 'Article supprimé avec succès.');
     }
@@ -164,7 +167,7 @@ class BlogController extends Controller
     public function removeImage(Blog $blog)
     {
         if ($blog->image) {
-            // Storage::delete($blog->image);
+            Storage::disk('public')->delete($blog->image);
             $blog->image = null;
             $blog->save();
 
@@ -179,7 +182,4 @@ class BlogController extends Controller
             'message' => "Aucune image trouvée à supprimer."
         ], 404);
     }
-
-
-
 }

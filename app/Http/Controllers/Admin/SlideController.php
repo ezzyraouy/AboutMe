@@ -160,6 +160,25 @@ class SlideController extends Controller
         return redirect()->route('admin.slides.index')->with('error', 'Slide supprimé avec succès.');
     }
 
+    public function removeImage(Slide $slide)
+    {
+        if ($slide->image) {
+            Storage::disk('public')->delete($slide->image);
+            $slide->image = null;
+            $slide->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
+    }
+
     public function deleteFile(Request $request)
     {
         $request->validate([

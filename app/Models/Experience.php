@@ -10,9 +10,10 @@ class Experience extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title', 'lieu','description', 'datedebut', 'datefin'];
+    protected $fillable = ['title','position', 'lieu','description', 'start_date', 'end_date'];
         protected $casts = [
         'title' => 'array',
+        'position' => 'array',
         'lieu' => 'array',
         'description' => 'array',
     ];

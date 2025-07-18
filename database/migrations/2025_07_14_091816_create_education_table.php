@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->json('title')->nullable();
             $table->json('lieu')->nullable();
-            $table->date('datedebut')->nullable();
-            $table->date('datefin')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

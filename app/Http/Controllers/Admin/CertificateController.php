@@ -106,4 +106,23 @@ class CertificateController extends Controller
         $certificate->delete();
         return redirect()->route('admin.certificates.index')->with('error', 'Certificate supprimé avec succès.');
     }
+
+    public function removeImage(Certificate $certificate)
+    {
+        if ($certificate->image) {
+            Storage::disk('public')->delete($certificate->image);
+            $certificate->image = null;
+            $certificate->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
+    }
 }

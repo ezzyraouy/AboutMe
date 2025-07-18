@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Experience;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\Storage;
 class ExperienceController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Experience::select(['id', 'title', 'lieu', 'datedebut', 'datefin', 'created_at'])->latest();
+            $query = Experience::select(['id', 'title', 'lieu', 'start_date', 'end_date', 'created_at'])->latest();
 
             return DataTables::of($query)
                 ->addColumn('title_fr', fn($exp) => $exp->title['fr'] ?? '-')
@@ -43,6 +43,11 @@ class ExperienceController extends Controller
             'title.en' => 'nullable|string',
             'title.ar' => 'nullable|string',
 
+            'position' => 'required|array',
+            'position.fr' => 'required|string',
+            'position.en' => 'nullable|string',
+            'position.ar' => 'nullable|string',
+
             'description' => 'nullable|array',
             'description.fr' => 'nullable|string',
             'description.en' => 'nullable|string',
@@ -53,8 +58,8 @@ class ExperienceController extends Controller
             'lieu.en' => 'nullable|string',
             'lieu.ar' => 'nullable|string',
 
-            'datedebut' => 'required|date',
-            'datefin' => 'nullable|date',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date',
         ]);
 
         Experience::create($data);
@@ -75,6 +80,11 @@ class ExperienceController extends Controller
             'title.en' => 'nullable|string',
             'title.ar' => 'nullable|string',
 
+            'position' => 'required|array',
+            'position.fr' => 'required|string',
+            'position.en' => 'nullable|string',
+            'position.ar' => 'nullable|string',
+
             'description' => 'nullable|array',
             'description.fr' => 'nullable|string',
             'description.en' => 'nullable|string',
@@ -85,8 +95,8 @@ class ExperienceController extends Controller
             'lieu.en' => 'nullable|string',
             'lieu.ar' => 'nullable|string',
 
-            'datedebut' => 'required|date',
-            'datefin' => 'nullable|date',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date',
         ]);
 
         $experience->update($data);
@@ -96,8 +106,28 @@ class ExperienceController extends Controller
 
     public function destroy(Experience $experience)
     {
+        if ($experience->image) {
+            Storage::disk('public')->delete($experience->image);
+        }
         $experience->delete();
-
         return redirect()->route('admin.experiences.index')->with('error', 'Expérience supprimée avec succès.');
+    }
+    public function removeImage(Experience $experience)
+    {
+        if ($experience->image) {
+            Storage::disk('public')->delete($experience->image);
+            $experience->image = null;
+            $experience->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
     }
 }

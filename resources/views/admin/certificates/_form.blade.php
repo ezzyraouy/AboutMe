@@ -42,7 +42,10 @@
 
         {{-- Image --}}
         <div class="col-12 mb-4">
-            <x-admin.ui.inputs.image-upload :value="$certificate->image ?? null" :certificateId="$certificate->id ?? null" />
+            <x-admin.ui.inputs.image-upload 
+                :value="isset($certificate) ? ($certificate->image ?? null) : null" 
+                :deleteUrl="isset($certificate) ? route('admin.certificates.destroyImage', $certificate) : null" 
+            />
         </div>
     </div>
 

@@ -34,22 +34,22 @@
         {{-- Date début --}}
         <div class="col-md-6">
             <x-admin.ui.inputs.text
-                id="datedebut"
-                name="datedebut"
+                id="start_date"
+                name="start_date"
                 label="Date de début"
                 type="date"
-                :value="$education->datedebut ?? ''"
+                :value="$education->start_date ?? ''"
                 required />
         </div>
 
         {{-- Date fin --}}
         <div class="col-md-6">
             <x-admin.ui.inputs.text
-                id="datefin"
-                name="datefin"
+                id="end_date"
+                name="end_date"
                 label="Date de fin"
                 type="date"
-                :value="$education->datefin ?? ''" />
+                :value="$education->end_date ?? ''" />
         </div>
     </div>
 

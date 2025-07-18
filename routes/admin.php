@@ -30,18 +30,25 @@ Route::middleware(['auth', 'is_admin'])->group(callback: function () {
     Route::delete('/projects/{project}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.removeImage');
     //educations
     Route::resource('educations', EducationController::class);
+    Route::delete('/educations/{education}/remove-image', [EducationController::class, 'removeImage'])->name('educations.removeImage');
     //experiences
     Route::resource('experiences', ExperienceController::class);
+    Route::delete('/experiences/{experience}/remove-image', [ExperienceController::class, 'removeImage'])->name('experiences.removeImage');
     //skills
     Route::resource('skills', SkillController::class);
+    Route::delete('/skills/{skill}/remove-image', [SkillController::class, 'removeImage'])->name('skills.removeImage');
     //services
     Route::resource('services', ServiceController::class);
+    Route::delete('/services/{service}/remove-image', [ServiceController::class, 'removeImage'])->name('services.removeImage');
     //certificates
     Route::resource('certificates', CertificateController::class);
+    Route::delete('/certificates/{certificate}/remove-image', [CertificateController::class, 'removeImage'])->name('certificates.removeImage');
     //categories
     Route::resource('categories', CategoryController::class);
+    Route::delete('/categories/{category}/remove-image', [CategoryController::class, 'removeImage'])->name('categories.removeImage');
     //slides
     Route::resource('slides', SlideController::class);
+    Route::delete('/slides/{slide}/remove-image', [SlideController::class, 'removeImage'])->name('slides.removeImage');
     Route::post('/slides/delete-file', [SlideController::class, 'deleteFile'])->name('slides.deletefile');
     //settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

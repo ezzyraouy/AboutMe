@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Education;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class EducationController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Education::select(['id', 'title', 'lieu', 'datedebut', 'datefin', 'created_at'])->latest();
+            $query = Education::select(['id', 'title', 'lieu', 'start_date', 'end_date', 'created_at'])->latest();
 
             return DataTables::of($query)
                 ->addColumn('title_fr', function ($education) {
@@ -52,8 +53,8 @@ class EducationController extends Controller
             'lieu.en' => 'nullable|string',
             'lieu.ar' => 'nullable|string',
 
-            'datedebut' => 'required|date',
-            'datefin' => 'nullable|date|after_or_equal:datedebut',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
         Education::create($data);
@@ -79,8 +80,8 @@ class EducationController extends Controller
             'lieu.en' => 'nullable|string',
             'lieu.ar' => 'nullable|string',
 
-            'datedebut' => 'required|date',
-            'datefin' => 'nullable|date|after_or_equal:datedebut',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
         $education->update($data);
@@ -90,7 +91,28 @@ class EducationController extends Controller
 
     public function destroy(Education $education)
     {
+        if ($education->image) {
+            Storage::disk('public')->delete($education->image);
+        }
         $education->delete();
         return redirect()->route('admin.educations.index')->with('error', 'Éducation supprimée avec succès.');
+    }
+    public function removeImage(Education $education)
+    {
+        if ($education->image) {
+            Storage::disk('public')->delete($education->image);
+            $education->image = null;
+            $education->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
     }
 }

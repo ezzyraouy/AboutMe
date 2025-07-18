@@ -33,7 +33,9 @@
 
         {{-- Image --}}
         <div class="col-12 mb-4">
-            <x-admin.ui.inputs.image-upload :value="$service->image ?? null" :serviceId="$service->id ?? null" />
+            <x-admin.ui.inputs.image-upload
+                :value="isset($service) ? ($service->image ?? null) : null"
+                :deleteUrl="isset($service) ? route('admin.services.destroyImage', $service) : null" />
         </div>
     </div>
 

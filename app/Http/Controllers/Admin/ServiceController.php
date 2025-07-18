@@ -102,4 +102,23 @@ class ServiceController extends Controller
         $service->delete();
         return redirect()->route('admin.services.index')->with('error', 'Service supprimé avec succès.');
     }
+
+    public function removeImage(Service $service)
+    {
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+            $service->image = null;
+            $service->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "L'image principale a été supprimée avec succès."
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Aucune image trouvée à supprimer."
+        ], 404);
+    }          
 }

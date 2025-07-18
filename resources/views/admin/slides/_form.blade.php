@@ -51,10 +51,8 @@
         {{-- Image upload --}}
         <div class="col-md-6">
             <x-admin.ui.inputs.image-upload
-                id="image"
-                name="image"
-                label="Image principale"
-                :value="$slide->image ?? ''" />
+                :value="isset($slide) ? ($slide->image ?? null) : null"
+                :deleteUrl="isset($slide) ? route('admin.slides.destroyImage', $slide) : null" />
         </div>
 
         {{-- Background --}}
@@ -62,9 +60,10 @@
             <x-admin.ui.inputs.image-upload
                 id="background"
                 name="background"
-                label="Background"
-                placeholder="background"
-                :value="$slide->background ?? ''" />
+                label="Image de fond"
+                placeholder="Télécharger une image de fond"
+                :value="isset($slide) ? ($slide->background ?? null) : null"
+                :deleteUrl="isset($slide) ? route('admin.slides.destroyBackground', $slide) : null" />
         </div>
 
         {{-- Order --}}

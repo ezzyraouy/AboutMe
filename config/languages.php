@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'available' => ['fr', 'en', 'du'],
+    'available' => ['fr', 'en', 'ar'],
     'default' => 'fr',
 ];

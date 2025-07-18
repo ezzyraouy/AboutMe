@@ -11,7 +11,7 @@ class Skill extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'percent'];
+    protected $fillable = ['title', 'percent', 'icon'];
     protected $casts = [
         'title' => 'array',
         'percent' => 'array',

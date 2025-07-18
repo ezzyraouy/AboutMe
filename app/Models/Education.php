@@ -11,7 +11,7 @@ class Education extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'educations';
-    protected $fillable = ['title', 'lieu', 'datedebut', 'datefin'];
+    protected $fillable = ['title', 'lieu', 'start_date', 'end_date'];
     
     protected $casts = [
         'title' => 'array',
