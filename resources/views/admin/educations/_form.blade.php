@@ -3,6 +3,7 @@
     :action="isset($education) ? route('admin.educations.update', $education) : route('admin.educations.store')"
     :method="isset($education) ? 'PUT' : 'POST'"
     :show-reset="!isset($education)"
+    enctype="multipart/form-data"
     submit-label="{{ isset($education) ? 'Mettre à jour' : 'Créer' }}">
 
     <div class="row">

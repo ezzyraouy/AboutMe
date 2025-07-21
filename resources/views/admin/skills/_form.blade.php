@@ -2,6 +2,7 @@
     :title="isset($skill) ? 'Modifier une compétence' : 'Ajouter une compétence'"
     :action="isset($skill) ? route('admin.skills.update', $skill) : route('admin.skills.store')"
     :method="isset($skill) ? 'PUT' : 'POST'"
+    enctype="multipart/form-data"
     :show-reset="!isset($skill)"
     submit-label="{{ isset($skill) ? 'Mettre à jour' : 'Créer' }}">
 
@@ -24,8 +25,7 @@
                 name="percent[{{ $lang }}]"
                 label="Pourcentage ({{ strtoupper($lang) }})"
                 placeholder="Ex: 85"
-                :value="$skill->percent[$lang] ?? ''"
-                :required="$lang === 'fr'" />
+                :value="$skill->percent[$lang] ?? ''" />
         </div>
         @endforeach
         {{-- icon --}}
@@ -36,7 +36,7 @@
                 label="Icône"
                 placeholder="Télécharger une icône"
                 :value="isset($skill) ? ($skill->icon ?? null) : null"
-                :deleteUrl="isset($skill) ? route('admin.skills.destroyImage', $skill) : null" />
+                :deleteUrl="isset($skill) ? route('admin.skills.removeImage', $skill) : null" />
         </div>
     </div>
 

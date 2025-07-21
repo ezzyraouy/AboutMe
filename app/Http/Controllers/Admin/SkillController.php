@@ -7,6 +7,7 @@ use App\Models\Skill;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+
 class SkillController extends Controller
 {
     public function index(Request $request)
@@ -42,6 +43,7 @@ class SkillController extends Controller
             'title.fr' => 'required|string',
             'title.en' => 'nullable|string',
             'title.ar' => 'nullable|string',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
 
             'percent' => 'required|array',
             'percent.fr' => 'required|numeric|min:0|max:100',
@@ -49,6 +51,11 @@ class SkillController extends Controller
             'percent.ar' => 'nullable|numeric|min:0|max:100',
         ]);
 
+        // Handle icon update
+        if ($request->hasFile('icon')) {
+            $iconPath = $request->file('icon')->store('Skills', 'public');
+            $data['icon'] = $iconPath;
+        }
         Skill::create($data);
 
         return redirect()->route('admin.skills.index')->with('success', 'Compétence ajoutée avec succès.');
@@ -66,6 +73,7 @@ class SkillController extends Controller
             'title.fr' => 'required|string',
             'title.en' => 'nullable|string',
             'title.ar' => 'nullable|string',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
 
             'percent' => 'required|array',
             'percent.fr' => 'required|numeric|min:0|max:100',
@@ -73,6 +81,15 @@ class SkillController extends Controller
             'percent.ar' => 'nullable|numeric|min:0|max:100',
         ]);
 
+        // Handle image update
+        if ($request->hasFile('icon')) {
+            if ($skill->icon) {
+                Storage::disk('public')->delete($skill->icon);
+            }
+
+            $iconPath = $request->file('icon')->store('Skills', 'public');
+            $data['icon'] = $iconPath;
+        }
         $skill->update($data);
 
         return redirect()->back()->with('success', 'Compétence modifiée avec succès.');
@@ -84,7 +101,7 @@ class SkillController extends Controller
             Storage::disk('public')->delete($skill->image);
         }
         $skill->delete();
-        return redirect()->route('admin.projects.index')->with('error', 'Project supprimé avec succès.');
+        return redirect()->route('admin.skills.index')->with('error', 'Project supprimé avec succès.');
     }
 
     public function removeImage(Skill $skill)

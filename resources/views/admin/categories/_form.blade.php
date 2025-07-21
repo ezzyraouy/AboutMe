@@ -1,6 +1,7 @@
 <x-admin.ui.form-card :title="isset($category) ? 'Modifier une category' : 'Ajouter une category'"
     :action="isset($category) ? route('admin.categories.update', $category) : route('admin.categories.store')"
     :method="isset($category) ? 'PUT' : 'POST'"
+    enctype="multipart/form-data"
     :show-reset="!isset($category)"
     submit-label="{{ isset($category) ? 'Mettre à jour' : 'Créer' }}">
 

@@ -52,7 +52,7 @@
         <div class="col-md-6">
             <x-admin.ui.inputs.image-upload
                 :value="isset($slide) ? ($slide->image ?? null) : null"
-                :deleteUrl="isset($slide) ? route('admin.slides.destroyImage', $slide) : null" />
+                :deleteUrl="isset($slide) ? route('admin.slides.removeImage', $slide) : null" />
         </div>
 
         {{-- Background --}}

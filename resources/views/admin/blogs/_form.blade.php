@@ -23,13 +23,13 @@
         <div class="col-12 mb-4">
              <x-admin.ui.inputs.image-upload 
                 :value="isset($blog) ? ($blog->image ?? null) : null" 
-                :deleteUrl="isset($blog) ? route('admin.blogs.destroyImage', $blog) : null" 
+                :deleteUrl="isset($blog) ? route('admin.blogs.removeImage', $blog) : null" 
             />
         </div>
 
         {{-- Fichiers --}}
         <div class="col-12">
-            <x-admin.ui.inputs.file-multiple label="Fichiers (images, vidéos, PDF)" :existingFiles="$blog->resources" />
+            <x-admin.ui.inputs.file-multiple label="Fichiers (images, vidéos, PDF)" :existingFiles="$blog->resources ?? []" />
         </div>
 
     </div>

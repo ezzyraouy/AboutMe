@@ -21,7 +21,7 @@
 </div>
 
 {{-- Resources Preview --}}
-@if (isset($existingFiles) && $blog->existingFiles->count())
+@if (!empty($existingFiles))
 <div class="row" id="resources-container">
     @foreach ($existingFiles as $resource)
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4 resource-item" data-id="{{ $resource->id }}">

@@ -2,6 +2,7 @@
     :title="isset($experience) ? 'Modifier une expérience' : 'Ajouter une expérience'"
     :action="isset($experience) ? route('admin.experiences.update', $experience) : route('admin.experiences.store')" 
     :method="isset($experience) ? 'PUT' : 'POST'" 
+    enctype="multipart/form-data"
     :show-reset="!isset($experience)"
     submit-label="{{ isset($experience) ? 'Mettre à jour' : 'Créer' }}"
 >

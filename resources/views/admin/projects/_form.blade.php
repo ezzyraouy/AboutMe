@@ -1,6 +1,7 @@
 <x-admin.ui.form-card :title="isset($project) ? 'Modifier un project' : 'Ajouter un project'"
     :action="isset($project) ? route('admin.projects.update', $project) : route('admin.projects.store')"
-    :method="isset($project) ? 'PUT' : 'POST'" enctype="multipart/form-data"
+    :method="isset($project) ? 'PUT' : 'POST'" 
+    enctype="multipart/form-data"
     :show-reset="!isset($project)"
     submit-label="{{ isset($project) ? 'Mettre à jour' : 'Créer' }}">
 
@@ -77,12 +78,12 @@
         <div class="col-12 mb-4">
             <x-admin.ui.inputs.image-upload
                 :value="isset($project) ? ($project->image ?? null) : null"
-                :deleteUrl="isset($project) ? route('admin.projects.destroyImage', $project) : null" />
+                :deleteUrl="isset($project) ? route('admin.projects.removeImage', $project) : null" />
         </div>
 
         {{-- Fichiers --}}
         <div class="col-12">
-            <x-admin.ui.inputs.file-multiple label="Fichiers (images, vidéos, PDF)" :existingFiles="$project->resources" />
+            <x-admin.ui.inputs.file-multiple label="Fichiers (images, vidéos, PDF)" :existingFiles="$project->resources  ?? []" />
         </div>
     </div>
 

@@ -50,6 +50,8 @@ Route::middleware(['auth', 'is_admin'])->group(callback: function () {
     Route::resource('slides', SlideController::class);
     Route::delete('/slides/{slide}/remove-image', [SlideController::class, 'removeImage'])->name('slides.removeImage');
     Route::post('/slides/delete-file', [SlideController::class, 'deleteFile'])->name('slides.deletefile');
+    //destroy resources
+    Route::delete('/resources/destroy/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');
     //settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');

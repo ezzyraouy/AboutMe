@@ -13,8 +13,7 @@
             @endif
 
             <textarea id="{{ $id }}" name="{{ $name }}"
-                class="tinymce-editor form-control @error($errorKey) is-invalid @enderror" placeholder="{{ $placeholder }}"
-                {{ $required ? 'required' : '' }}>{!! old($name, $value) !!}</textarea>
+                class="tinymce-editor form-control @error($errorKey) is-invalid @enderror" placeholder="{{ $placeholder }}">{!! old($name, $value) !!}</textarea>
 
             @error($errorKey)
                 <span class="text-danger d-block">{{ $message }}</span>
