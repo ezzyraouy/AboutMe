@@ -31,7 +31,12 @@
         <div class="col-12">
             <x-admin.ui.inputs.file-multiple label="Fichiers (images, vidéos, PDF)" :existingFiles="$blog->resources ?? []" />
         </div>
-
     </div>
-
+    <div class="row">
+        {{-- Date --}}
+        <div class="col-md-6">
+            <x-admin.ui.inputs.text id="date" name="date" label="Date de publication" type="date"
+                :value="$blog->date ?? ''" required />
+        </div>
+    </div>
 </x-admin.ui.form-card>

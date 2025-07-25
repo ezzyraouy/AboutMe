@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Blog extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['title', 'content', 'slug','image'];
+    protected $fillable = ['title', 'content', 'slug','image','date'];
 
     protected $casts = [
         'title' => 'array',

@@ -12,7 +12,7 @@
     <title>Jembutfolio - Tailwind Personal Portfolio Template</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{('frontend/img/favicon.svg')}}" type="image/svg+xml" />
+    <link rel="icon" href="{{asset('frontend/img/favicon.svg')}}" type="image/svg+xml" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,9 +22,9 @@
         rel="stylesheet" />
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{('frontend/css/swiper-bundle.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{('frontend/css/venobox.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{('frontend/css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/swiper-bundle.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/venobox.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
 
     @stack('styles')
@@ -32,42 +32,38 @@
 
 <body class="relative h-screen overflow-y-auto overflow-x-hidden bg-light text-dark dark:bg-dark-2 dark:text-light">
     <div class="mx-auto flex max-w-screen-2xl flex-col justify-between gap-4 p-4 lg:gap-6 lg:p-6">
-
-
-
         <x-frontend.layout.header />
         <x-frontend.layout.mobile-menu />
         <main class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
             {{ $slot }}
         </main>
         <x-frontend.layout.footer />
-
-
     </div>
 
     <div class="shapes">
         <div class="fixed -left-1/2 -top-1/2 -z-10 animate-spin-very-slow xl:-left-[20%] xl:-top-1/3">
-            <img src="{{('frontend/img/gradient-1.png')}}" alt="" class="" />
+            <img src="{{asset('frontend/img/gradient-1.png')}}" alt="" class="" />
         </div>
 
         <div class="fixed -right-[50%] top-[10%] -z-10 animate-spin-very-slow xl:-right-[15%] xl:top-[10%]">
-            <img src="{{('frontend/img/gradient-2.png')}}" alt="" class="" />
+            <img src="{{asset('frontend/img/gradient-2.png')}}" alt="" class="" />
         </div>
 
         <div class="move-with-cursor fixed left-[10%] top-[20%] -z-10">
-            <img src="{{('frontend/img/object-3d-1.png')}}" alt="" class="" />
+            <img src="{{asset('frontend/img/object-3d-1.png')}}" alt="" class="" />
         </div>
 
         <div class="move-with-cursor fixed bottom-[20%] right-[10%] -z-10">
-            <img src="{{('frontend/img/object-3d-2.png')}}" alt="" class="" />
+            <img src="{{asset('frontend/img/object-3d-2.png')}}" alt="" class="" />
         </div>
     </div>
 
-    <script src="{{('frontend/js/preline.js')}}"></script>
-    <script src="{{('frontend/js/swiper-bundle.min.js')}}"></script>
-    <script src="{{('frontend/js/venobox.min.js')}}"></script>
-    <script src="{{('frontend/js/clipboard.min.js')}}"></script>
-    <script src="{{('frontend/js/main.js')}}"></script>
+    <script src="{{asset('frontend/js/preline.js')}}"></script>
+    <script src="{{asset('frontend/js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('frontend/js/venobox.min.js')}}"></script>
+    <script src="{{asset('frontend/js/clipboard.min.js')}}"></script>
+    <script src="{{asset('frontend/js/main.js')}}"></script>
+    <script src="https://unpkg.com/alpinejs@3.14.9/dist/cdn.min.js" defer></script>
     @stack('scripts')
 </body>
 

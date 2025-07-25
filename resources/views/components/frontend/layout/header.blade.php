@@ -3,7 +3,7 @@
     <div class="">
         <div class="flex items-center justify-between rounded-2xl bg-white p-3 shadow dark:bg-black dark:shadow-dark">
             <!-- Logo -->
-            <a href="index.html"
+            <a href="/"
                 class="inline-flex items-center gap-3 px-3 text-2xl font-semibold text-dark dark:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6">
                     <path fill="currentColor"
@@ -15,8 +15,8 @@
 
             <!-- Navigation menu -->
             <ul class="hidden flex-1 flex-wrap items-center justify-center lg:flex">
-                <li class="group/menu-item active">
-                    <a href="index.html"
+                <li class="group/menu-item {{ request()->is('/') ? 'active' : '' }}">
+                    <a href="/"
                         class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-center text-base font-medium text-muted transition hover:bg-light hover:text-dark group-[.active]/menu-item:bg-light group-[.active]/menu-item:text-dark dark:hover:bg-dark-2 dark:hover:text-white dark:group-[.active]/menu-item:bg-dark-2 dark:group-[.active]/menu-item:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
@@ -28,8 +28,8 @@
                         <span>Home</span>
                     </a>
                 </li>
-                <li class="group/menu-item">
-                    <a href="about.html"
+                <li class="group/menu-item {{ request()->is('about') ? 'active' : '' }}">
+                    <a href="/about"
                         class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-center text-base font-medium text-muted transition hover:bg-light hover:text-dark group-[.active]/menu-item:bg-light group-[.active]/menu-item:text-dark dark:hover:bg-dark-2 dark:hover:text-white dark:group-[.active]/menu-item:bg-dark-2 dark:group-[.active]/menu-item:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
@@ -41,8 +41,8 @@
                         <span>About</span>
                     </a>
                 </li>
-                <li class="group/menu-item">
-                    <a href="services.html"
+                <li class="group/menu-item {{ request()->is('services') ? 'active' : '' }}">
+                    <a href="/services"
                         class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-center text-base font-medium text-muted transition hover:bg-light hover:text-dark group-[.active]/menu-item:bg-light group-[.active]/menu-item:text-dark dark:hover:bg-dark-2 dark:hover:text-white dark:group-[.active]/menu-item:bg-dark-2 dark:group-[.active]/menu-item:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
@@ -53,8 +53,8 @@
                         <span>Services</span>
                     </a>
                 </li>
-                <li class="group/menu-item">
-                    <a href="portfolio.html"
+                <li class="group/menu-item {{ request()->is('projects*') ? 'active' : '' }}">
+                    <a href="/projects"
                         class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-center text-base font-medium text-muted transition hover:bg-light hover:text-dark group-[.active]/menu-item:bg-light group-[.active]/menu-item:text-dark dark:hover:bg-dark-2 dark:hover:text-white dark:group-[.active]/menu-item:bg-dark-2 dark:group-[.active]/menu-item:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
@@ -65,8 +65,8 @@
                         <span>Works</span>
                     </a>
                 </li>
-                <li class="group/menu-item">
-                    <a href="blog.html"
+                <li class="group/menu-item {{ request()->is('blogs*') ? 'active' : '' }}">
+                    <a href="/blogs"
                         class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-center text-base font-medium text-muted transition hover:bg-light hover:text-dark group-[.active]/menu-item:bg-light group-[.active]/menu-item:text-dark dark:hover:bg-dark-2 dark:hover:text-white dark:group-[.active]/menu-item:bg-dark-2 dark:group-[.active]/menu-item:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
@@ -74,19 +74,7 @@
                             <path
                                 d="m14.667 9.167 1.25-1.25a2.357 2.357 0 1 0-3.333-3.334l-8.75 8.75v3.334h3.333L8.834 15m2.916-9.583 3.333 3.333m.417 9.583 2.792-2.736a1.785 1.785 0 0 0 .004-2.56 1.87 1.87 0 0 0-2.608-.005l-.186.184-.186-.184a1.869 1.869 0 0 0-2.607-.005 1.787 1.787 0 0 0-.005 2.56l2.796 2.746Z" />
                         </svg>
-                        <span>Blog</span>
-                    </a>
-                </li>
-                <li class="group/menu-item">
-                    <a href="contact.html"
-                        class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-center text-base font-medium text-muted transition hover:bg-light hover:text-dark group-[.active]/menu-item:bg-light group-[.active]/menu-item:text-dark dark:hover:bg-dark-2 dark:hover:text-white dark:group-[.active]/menu-item:bg-dark-2 dark:group-[.active]/menu-item:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
-                            class="h-6 w-6 text-[#8991A7] transition group-hover:text-dark group-[.active]/menu-item:text-dark dark:group-hover:text-white dark:group-[.active]/menu-item:text-white">
-                            <path
-                                d="M6.667 7.5h6.666m-6.666 3.333h5M15 3.333a2.5 2.5 0 0 1 2.5 2.5V12.5A2.5 2.5 0 0 1 15 15h-4.167l-4.166 2.5V15H5a2.5 2.5 0 0 1-2.5-2.5V5.833a2.5 2.5 0 0 1 2.5-2.5h10Z" />
-                        </svg>
-                        <span>Contact</span>
+                        <span>Blogs</span>
                     </a>
                 </li>
             </ul>
@@ -113,9 +101,9 @@
                     </button>
                 </div>
 
-                <a href="contact.html"
+                <a href="/contact"
                     class="inline-flex items-center gap-2 rounded-lg bg-dark px-6 py-4 text-center text-base font-semibold leading-tight text-white transition hover:bg-primary dark:bg-dark-2 dark:text-white dark:hover:bg-primary dark:hover:text-white">
-                    <span>Let's Talk</span>
+                    <span>Contact</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor"
                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="h-5 w-5">
                         <path d="M17.5 11.667v-5h-5" />
