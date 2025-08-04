@@ -7,6 +7,7 @@ use App\Models\Skill;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SkillRequest;
 
 class SkillController extends Controller
 {
@@ -36,20 +37,9 @@ class SkillController extends Controller
         return view('admin.skills.create');
     }
 
-    public function store(Request $request)
+    public function store(SkillRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-
-            'percent' => 'required|array',
-            'percent.fr' => 'required|numeric|min:0|max:100',
-            'percent.en' => 'nullable|numeric|min:0|max:100',
-            'percent.ar' => 'nullable|numeric|min:0|max:100',
-        ]);
+        $data = $request->validated();
 
         // Handle icon update
         if ($request->hasFile('icon')) {
@@ -66,20 +56,9 @@ class SkillController extends Controller
         return view('admin.skills.edit', compact('skill'));
     }
 
-    public function update(Request $request, Skill $skill)
+    public function update(SkillRequest $request, Skill $skill)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-
-            'percent' => 'required|array',
-            'percent.fr' => 'required|numeric|min:0|max:100',
-            'percent.en' => 'nullable|numeric|min:0|max:100',
-            'percent.ar' => 'nullable|numeric|min:0|max:100',
-        ]);
+        $data = $request->validated();
 
         // Handle image update
         if ($request->hasFile('icon')) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use App\Http\Requests\CertificateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -35,23 +36,9 @@ class CertificateController extends Controller
         return view('admin.certificates.create');
     }
 
-    public function store(Request $request)
+    public function store(CertificateRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'required|array',
-            'description.fr' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'link' => 'nullable|url',
-
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('certificates', 'public');
@@ -67,23 +54,9 @@ class CertificateController extends Controller
         return view('admin.certificates.edit', compact('certificate'));
     }
 
-    public function update(Request $request, Certificate $certificate)
+    public function update(CertificateRequest $request, Certificate $certificate)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'required|array',
-            'description.fr' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'link' => 'nullable|url',
-
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             if ($certificate->image) {

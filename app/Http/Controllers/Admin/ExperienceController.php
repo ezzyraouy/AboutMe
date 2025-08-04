@@ -7,6 +7,9 @@ use App\Models\Experience;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ExperienceRequest;
+use App\Http\Requests\SkillRequest;
+
 class ExperienceController extends Controller
 {
     public function index(Request $request)
@@ -35,32 +38,9 @@ class ExperienceController extends Controller
         return view('admin.experiences.create');
     }
 
-    public function store(Request $request)
+    public function store(ExperienceRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'position' => 'required|array',
-            'position.fr' => 'required|string',
-            'position.en' => 'nullable|string',
-            'position.ar' => 'nullable|string',
-
-            'description' => 'nullable|array',
-            'description.fr' => 'nullable|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'lieu' => 'required|array',
-            'lieu.fr' => 'required|string',
-            'lieu.en' => 'nullable|string',
-            'lieu.ar' => 'nullable|string',
-
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date',
-        ]);
+        $data = $request->validated();
 
         Experience::create($data);
 
@@ -72,32 +52,9 @@ class ExperienceController extends Controller
         return view('admin.experiences.edit', compact('experience'));
     }
 
-    public function update(Request $request, Experience $experience)
+    public function update(ExperienceRequest $request, Experience $experience)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'position' => 'required|array',
-            'position.fr' => 'required|string',
-            'position.en' => 'nullable|string',
-            'position.ar' => 'nullable|string',
-
-            'description' => 'nullable|array',
-            'description.fr' => 'nullable|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'lieu' => 'required|array',
-            'lieu.fr' => 'required|string',
-            'lieu.en' => 'nullable|string',
-            'lieu.ar' => 'nullable|string',
-
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date',
-        ]);
+        $data = $request->validated();
 
         $experience->update($data);
 

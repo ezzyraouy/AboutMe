@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Http\Requests\ContactRequest;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -35,15 +36,9 @@ class ContactController extends Controller
         return view('admin.contacts.create');
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'object' => 'nullable|string|max:255',
-            'message' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
 
         Contact::create($validated);
 
@@ -55,15 +50,9 @@ class ContactController extends Controller
         return view('admin.contacts.edit', compact('contact'));
     }
 
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
-        $validated = $request->validate([
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'object' => 'nullable|string|max:255',
-            'message' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
 
         $contact->update($validated);
 

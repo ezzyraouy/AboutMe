@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\BlogRequest;
 
 class BlogController extends Controller
 {
@@ -44,21 +45,9 @@ class BlogController extends Controller
         return view('admin.blogs.create');
     }
 
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'content' => 'required|array',
-            'content.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-            'content.en' => 'nullable|string',
-            'date' => 'required|date',
-            'content.ar' => 'nullable|string',
-            'files.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,pdf|max:10240',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         // Slug generation
         $count = 1;
@@ -101,21 +90,9 @@ class BlogController extends Controller
         return view('admin.blogs.edit', compact('blog'));
     }
 
-    public function update(Request $request, Blog $blog)
+    public function update(BlogRequest $request, Blog $blog)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-            'date' => 'required|date',
-            'content' => 'required|array',
-            'content.fr' => 'required|string',
-            'content.en' => 'nullable|string',
-            'content.ar' => 'nullable|string',
-            'files.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,pdf|max:10240',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         // Slug generation
         $count = 1;

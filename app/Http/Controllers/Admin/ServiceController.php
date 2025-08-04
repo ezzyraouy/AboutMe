@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Http\Requests\ServiceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -35,21 +36,9 @@ class ServiceController extends Controller
         return view('admin.services.create');
     }
 
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'required|array',
-            'description.fr' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('services', 'public');
@@ -65,21 +54,9 @@ class ServiceController extends Controller
         return view('admin.services.edit', compact('service'));
     }
 
-    public function update(Request $request, Service $service)
+    public function update(ServiceRequest $request, Service $service)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'required|array',
-            'description.fr' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             if ($service->image) {
@@ -120,5 +97,5 @@ class ServiceController extends Controller
             'success' => false,
             'message' => "Aucune image trouvée à supprimer."
         ], 404);
-    }          
+    }
 }

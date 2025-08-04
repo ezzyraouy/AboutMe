@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -47,26 +48,9 @@ class ProjectController extends Controller
 
 
 
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'required|array',
-            'description.fr' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'link' => 'nullable|url',
-            'github_link' => 'nullable|url',
-            'video' => 'nullable|url',
-
-            'files.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,pdf|max:10240',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         // Slug generation
         $count = 1;
@@ -109,26 +93,9 @@ class ProjectController extends Controller
         return view('admin.projects.edit', compact('project', 'categories'));
     }
 
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'required|array',
-            'description.fr' => 'required|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'link' => 'nullable|url',
-            'github_link' => 'nullable|url',
-            'video' => 'nullable|url',
-
-            'files.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,pdf|max:10240',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-        ]);
+        $data = $request->validated();
 
         // Slug generation
         $count = 1;
@@ -179,7 +146,7 @@ class ProjectController extends Controller
         $project->delete();
         return redirect()->route('admin.projects.index')->with('error', 'Project supprimé avec succès.');
     }
-   
+
     public function removeImage(Project $project)
     {
         if ($project->image) {

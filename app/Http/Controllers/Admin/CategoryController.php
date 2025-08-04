@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -37,19 +38,9 @@ class CategoryController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'nullable|array',
-            'description.fr' => 'nullable|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
         Category::create($data);
 
@@ -61,19 +52,9 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'nullable|array',
-            'description.fr' => 'nullable|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
         $category->update($data);
 

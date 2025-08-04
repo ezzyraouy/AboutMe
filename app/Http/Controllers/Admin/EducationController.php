@@ -7,6 +7,7 @@ use App\Models\Education;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SkillRequest;
 
 class EducationController extends Controller
 {
@@ -40,22 +41,9 @@ class EducationController extends Controller
         return view('admin.educations.create');
     }
 
-    public function store(Request $request)
+    public function store(SkillRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'lieu' => 'required|array',
-            'lieu.fr' => 'required|string',
-            'lieu.en' => 'nullable|string',
-            'lieu.ar' => 'nullable|string',
-
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-        ]);
+        $data = $request->validated();
 
         Education::create($data);
 
@@ -67,22 +55,9 @@ class EducationController extends Controller
         return view('admin.educations.edit', compact('education'));
     }
 
-    public function update(Request $request, Education $education)
+    public function update(SkillRequest $request, Education $education)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'lieu' => 'required|array',
-            'lieu.fr' => 'required|string',
-            'lieu.en' => 'nullable|string',
-            'lieu.ar' => 'nullable|string',
-
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-        ]);
+        $data = $request->validated();
 
         $education->update($data);
 

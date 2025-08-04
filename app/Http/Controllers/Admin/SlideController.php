@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SlideRequest;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -36,29 +37,9 @@ class SlideController extends Controller
         return view('admin.slides.create');
     }
 
-    public function store(Request $request)
+    public function store(SlideRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
-
-            'description' => 'nullable|array',
-            'description.fr' => 'nullable|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'file' => 'nullable|array',
-            'file.fr' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,mp4|max:5120',
-            'file.en' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,mp4|max:5120',
-            'file.ar' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,mp4|max:5120',
-
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-            'order' => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
 
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -89,29 +70,10 @@ class SlideController extends Controller
         return view('admin.slides.edit', compact('slide'));
     }
 
-    public function update(Request $request, Slide $slide)
+    public function update(SlideRequest $request, Slide $slide)
     {
-        $data = $request->validate([
-            'title' => 'required|array',
-            'title.fr' => 'required|string',
-            'title.en' => 'nullable|string',
-            'title.ar' => 'nullable|string',
+        $data = $request->validated();
 
-            'description' => 'nullable|array',
-            'description.fr' => 'nullable|string',
-            'description.en' => 'nullable|string',
-            'description.ar' => 'nullable|string',
-
-            'file' => 'nullable|array',
-            'file.fr' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,mp4|max:5120',
-            'file.en' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,mp4|max:5120',
-            'file.ar' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,mp4|max:5120',
-
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
-            'order' => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
-        ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
